@@ -1,0 +1,34 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_DATABASE_URL")
+}
+
+generator db {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(uuid()) @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name String
+  plans     Plan[]
+}
+
+model Plan {
+  id          String    @id @default(uuid()) @unique
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  title       String
+  description String?
+  image       String?
+  startDate   DateTime
+  endDate     DateTime
+  text        String
+  parentId    String?
+  parent      Plan?     @relation("PlanToPlan", fields: [parentId], references: [id])
+  children    Plan[]    @relation("PlanToPlan")
+  userId      String?
+  User        User?     @relation(fields: [userId], references: [id])
+}
