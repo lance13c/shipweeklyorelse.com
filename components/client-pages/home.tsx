@@ -105,6 +105,7 @@ const HomePage = () => {
                 duration: 1,
               }}
             />
+
             <Logo
               style={{
                 boxShadow:
