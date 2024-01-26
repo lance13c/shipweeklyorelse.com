@@ -12,4 +12,4 @@ Join today for $10/month [shipweeklyorelse.com](https://shipweeklyorelse.com)
 
 ### Reinvesting
 
-We gamify the incentives by giving members a share of all monthly subscriptions.
+We gamify the incentives.
