@@ -151,6 +151,7 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
                     className="w-full"
                     color="secondary"
                     variant="solid"
+                    // @ts-expect-error - valid
                     onClick={(e) => createStripeCheckout.call(e)}
                   >
                     <span className="pr-1 text-md">Join</span>
@@ -208,6 +209,7 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
                     discount-id=""
                     color="secondary"
                     variant="solid"
+                    // @ts-expect-error - valid
                     onClick={(e) => createStripeCheckout.call(e)}
                   >
                     Join
