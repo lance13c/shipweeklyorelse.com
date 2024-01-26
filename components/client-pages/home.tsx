@@ -28,7 +28,7 @@ const HomePage = () => {
   };
 
   return (
-    <main className="flex w-full h-[800px] dark text-foreground bg-gray-900 py-10 px-[8vw]">
+    <main className="flex w-full dark text-foreground bg-gray-900 py-10 px-[8vw]">
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
         <h1 color="white" className="mb-2 text-5xl">
           Scared to ship your products publicly?
@@ -117,7 +117,7 @@ const HomePage = () => {
           </motion.div>
         </div>
 
-        <div className="flex w-[50%] h-full">
+        <div className="flex flex-col items-start w-[50%] h-full gap-4">
           <Input
             color="secondary"
             variant="bordered"
@@ -125,6 +125,7 @@ const HomePage = () => {
               setEmail(e.target.value);
               if (emailSchema.safeParse(e.target.value).success) {
                 setVisible(true);
+                console.log('true');
               } else {
                 setVisible(false);
               }
@@ -133,26 +134,10 @@ const HomePage = () => {
             className="font-medium"
             placeholder="Welcome to the grind, email please"
           />
-          <SubscriptionCard priceId={''} amount={0} subscriptionPeriod={'monthly'} />
-        </div>
 
-        {isVisible ? (
-          <motion.section
-            initial={{
-              opacity: 0,
-              rotateX: '30deg',
-            }}
-            animate={{
-              opacity: 1,
-              rotateX: '0deg',
-            }}
-            transition={{
-              duration: 0.4,
-            }}
-          >
-            <div className="h-10 w-20 bg-green">Card Info</div>
-          </motion.section>
-        ) : null}
+          <SubscriptionCard priceId={''} amount={0} subscriptionPeriod={'monthly'} />
+          {isVisible ? <SubscriptionCard priceId={''} amount={0} subscriptionPeriod={'monthly'} /> : null}
+        </div>
       </motion.div>
     </main>
   );
