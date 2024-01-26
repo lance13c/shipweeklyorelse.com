@@ -44,7 +44,7 @@ const HomePage = () => {
             color="white"
             className="mt-4 mb-2 text-4xl lg:text-5xl max-w-[800px]"
           >
-            Scared to ship your software products publicly?
+            Scared to ship your side products publicly?
           </h1>
           <h2 className="mb-4 text-xl lg:text-2xl font-medium">so are we.</h2>
           <div className="flex w-full flex-wrap-reverse justify-between">
