@@ -1,28 +1,27 @@
+import { createStripCheckoutSession } from '@/app/lib/server/payments/createStripeCheckoutSession';
 import { z } from 'zod';
 
-// Create zod schema for body
-const GeneratePlanBodySchema = z.object({
-  prompt: z.string().max(200),
-  parentPlanId: z.string().optional(),
+const WaitlistSchema = z.object({
+  priceId: z.string(),
+  discountId: z.string().optional(),
 });
 
 export async function POST(req: Request) {
-  const body = await req.json();
+  const body = (await req.json()) || {};
 
-  try {
-    const parsedBody = GeneratePlanBodySchema.safeParse(body);
-    if (!parsedBody.success) {
-      console.error(parsedBody.error.errors);
-      throw new Error('Invalid body.');
-    }
-    const { prompt, parentPlanId } = parsedBody.data;
-  } catch (error) {
-    return Response.json(
-      // @ts-expect-error -- valid
-      { message: error.message },
-      {
-        status: 500,
-      },
-    );
+  const { priceId, discountId } = WaitlistSchema.parse(body);
+
+  const { redirectUrl } = await createStripCheckoutSession({ priceId, discountId });
+  if (!redirectUrl) {
+    console.error({
+      message: 'Failed to create checkout session',
+    });
+    return Response.error();
   }
+
+  console.info('redirecting to', redirectUrl);
+
+  return Response.json({
+    redirectUrl,
+  });
 }
