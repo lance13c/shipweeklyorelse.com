@@ -8,7 +8,7 @@ const inter = Sora({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Ship Weekly Or Else',
-  description: 'Generate fully flushed workout, diet, or business plan.',
+  description: 'The discord community that ships side projects weekly.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
