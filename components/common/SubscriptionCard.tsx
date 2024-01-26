@@ -3,7 +3,7 @@
 import { assertIsDefined } from '@/app/lib/assertions';
 import clientEnvs from '@/app/lib/client/util/clientEnvs';
 import clientHTTP from '@/app/lib/client/util/clientHTTP';
-import { Button, Card, CardFooter, CardHeader, Chip, Divider, Tab, Tabs } from '@nextui-org/react';
+import { Button, Card, CardFooter, CardHeader, Checkbox, Chip, Divider, Link, Tab, Tabs } from '@nextui-org/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import React, { useMemo, useState } from 'react';
@@ -78,6 +78,7 @@ interface SubscriptionCardProps {
 const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ email }) => {
   const router = useRouter();
   const [isSaving, setIsSaving] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const createStripeAnnuallyCheckout = useMemo(
     () =>
@@ -134,13 +135,20 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ email }) => {
       <div className="p-4 mb-4 w-full bg-primary-500/20 border-primary-500/30 text-primary-700 border rounded-md text-xs">
         60 Day Money Back Guarantee
       </div>
+
       {/* <div className="p-4 mb-4 w-[500px] bg-primary-500/20 border-primary-500/30 text-primary-700 border rounded-md text-xs"> */}
       {/* Price Increase To $14.99 starting March 1st
       </div> */}
       <AnimatePresence mode="wait">
-        <Tabs className="relative" aria-label="Options">
+        <Tabs
+          className="relative"
+          aria-label="Options"
+          onSelectionChange={() => {
+            setIsChecked(false);
+          }}
+        >
           <Tab key="monthly" title="Monthly">
-            <Card key={'price-monthly'} as={motion.div} className="max-w-[400px]">
+            <Card key={'price-monthly'} as={motion.div} className="min-w-[280px] max-w-[400px]">
               <motion.div variants={animateRightVariant} initial="initial" animate="animate" exit="exit">
                 <CardHeader className="flex gap-3 justify-between">
                   <div className="flex flex-col">
@@ -154,10 +162,29 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ email }) => {
                   </div>
                 </CardHeader>
                 <Divider />
-                <CardFooter>
+                <CardFooter className="flex flex-col gap-3 items-start">
+                  <Checkbox
+                    className="text-xs"
+                    onChange={(e) => {
+                      setIsChecked(e.target.checked);
+                    }}
+                  >
+                    <span className="text-xs">
+                      You have read and agree to our{' '}
+                      <Link className="text-xs" href="/terms">
+                        terms of service
+                      </Link>{' '}
+                      and{' '}
+                      <Link className="text-xs" href="/privacy">
+                        privacy policy
+                      </Link>
+                      .
+                    </span>
+                  </Checkbox>
                   <Button
-                    className="w-full"
-                    color="secondary"
+                    disabled={!isChecked}
+                    className={`${!isChecked ? 'cursor-not-allowed' : ''} w-full`}
+                    color={isChecked ? 'secondary' : 'default'}
                     variant="solid"
                     // @ts-expect-error - valid
                     onClick={(e) => createStripeMonthlyCheckout.call(e)}
@@ -186,7 +213,7 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ email }) => {
               </div>
             }
           >
-            <Card key={'price-annual'} className="max-w-[400px]">
+            <Card key={'price-annual'} className="min-w-[280px] max-w-[400px]">
               <motion.div variants={animateLeftVariant} initial="initial" animate="animate" exit="exit">
                 <CardHeader className="flex items-start flex-col gap-3">
                   <div className="flex flex-col">
@@ -209,10 +236,30 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ email }) => {
                 </CardHeader>
                 <Divider />
 
-                <CardFooter>
+                <CardFooter className="flex flex-col gap-3 items-start">
+                  <Checkbox
+                    className="text-xs"
+                    onChange={(e) => {
+                      console.log(e.target.checked);
+                      setIsChecked(e.target.checked);
+                    }}
+                  >
+                    <span className="text-xs">
+                      You have read and agree to our{' '}
+                      <Link className="text-xs" href="/terms">
+                        terms of service
+                      </Link>{' '}
+                      and{' '}
+                      <Link className="text-xs" href="/privacy">
+                        privacy policy
+                      </Link>
+                      .
+                    </span>
+                  </Checkbox>
                   <Button
-                    className="w-full"
-                    color="secondary"
+                    disabled={!isChecked}
+                    className={`${!isChecked ? 'cursor-not-allowed' : ''} w-full`}
+                    color={isChecked ? 'secondary' : 'default'}
                     variant="solid"
                     isLoading={isSaving}
                     // @ts-expect-error - valid
