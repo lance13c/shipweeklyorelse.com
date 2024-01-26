@@ -10,7 +10,7 @@ const ThankYouPage: React.FC = () => {
   return (
     <div className="h-screen flex flex-col pt-[200px] items-center bg-gradient-to-br from-gray-800 to-gray-600 text-white">
       <h1 className="text-4xl font-bold mb-2">Welcome!</h1>
-      <p className="mb-4 text-lg">Let's start shipping software products! You will receive a welcome email soon.</p>
+      <p className="mb-4 text-lg">Let's start shipping side products! You will receive a welcome email soon.</p>
       <Button color="primary" onClick={() => router.push('/')}>
         Return Home
       </Button>
