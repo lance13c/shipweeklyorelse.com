@@ -205,6 +205,7 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
                     className="w-full"
                     data-price-id="price_1OcdrJKD3CXWHKgZn2rja245"
                     data-price-type="annual"
+                    discount-id=""
                     color="secondary"
                     variant="solid"
                     onClick={(e) => createStripeCheckout.call(e)}
