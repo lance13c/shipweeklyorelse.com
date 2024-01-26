@@ -12,4 +12,4 @@ Join today for $10/month [shipweeklyorelse.com](https://shipweeklyorelse.com)
 
 ### Incentives
 
-We gamify the incentives.
+We gamify the incentives...
