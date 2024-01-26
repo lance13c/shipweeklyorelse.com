@@ -50,7 +50,7 @@ const HomePage = () => {
           <div className="flex w-full flex-wrap-reverse justify-between">
             <div className="flex flex-col">
               <div className="flex flex-col flex-nowrap justify-between">
-                <p className="text-lg mb-10  mt-4">
+                <p className="text-lg mb-10 mt-4">
                   The{' '}
                   <span className="relative w-fit">
                     discord community
@@ -64,7 +64,7 @@ const HomePage = () => {
                   <li className="ml-4  list-disc">Enjoy the incentives and consequences...😮</li>
                 </ul>
               </div>
-              <div className="flex flex-col items-start w-[50%] h-full gap-4">
+              <div className="flex flex-col items-start w-full h-full gap-4 min-h-[500px]">
                 <Input
                   color="secondary"
                   variant="bordered"
@@ -78,7 +78,7 @@ const HomePage = () => {
                     }
                   }}
                   type="email"
-                  className="font-medium w-full min-w-[400px]"
+                  className="font-medium min-w-[280px] md:min-w-[400px] w-[50%]"
                   placeholder="Welcome to the grind, email please"
                 />
 
@@ -115,7 +115,7 @@ const HomePage = () => {
           </div>
         </motion.div>
       </main>
-      <footer className="px-[8vw] text-white bg-gray-900 flex-1 flex items-end relative bottom-0 w-full p-2 text-xs">
+      <footer className="pt-20 md:pt-0 px-[8vw] text-white bg-gray-900 flex-1 flex items-end relative bottom-0 w-full p-2 text-xs">
         <span className="bottom-0">© 2024 shipweeklyorelse.com brought to you by YoAmigo LLC all rights reserved</span>
       </footer>
     </>
