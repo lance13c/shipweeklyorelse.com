@@ -96,7 +96,7 @@ const HomePage = () => {
                 depth="1rem"
                 direction="both"
                 event="pointer"
-                eventRotation="40deg"
+                eventRotation="35deg"
                 eventDirection="default"
                 fade={false}
                 layers={20}

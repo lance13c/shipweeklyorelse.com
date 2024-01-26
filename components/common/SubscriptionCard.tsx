@@ -111,7 +111,7 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ email }) => {
 
           const { redirectUrl } = await clientHTTP.post('/api/waitlist', {
             body: JSON.stringify({
-              priceId: 'price_1OcdrJKD3CXWHKgZn2rja245',
+              priceId: clientEnvs.NEXT_PUBLIC_MONTHLY_PRICE_ID,
               email,
             }),
           });
