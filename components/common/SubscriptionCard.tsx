@@ -1,6 +1,7 @@
 'use client';
 
 import { assertIsDefined } from '@/app/lib/assertions';
+import clientEnvs from '@/app/lib/client/util/clientEnvs';
 import clientHTTP from '@/app/lib/client/util/clientHTTP';
 import { Button, Card, CardFooter, CardHeader, Chip, Divider, Tab, Tabs } from '@nextui-org/react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -55,54 +56,40 @@ const animateRightVariant = {
   },
 };
 
+const fadeAnimation = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+    },
+  },
+  exit: {
+    opacity: 0,
+  },
+};
+
 interface SubscriptionCardProps {
-  priceId: string;
-  discountId?: string;
-  amount: number;
-  discountAmount?: number;
-  title?: string;
-  description?: string;
-  subscriptionPeriod: 'monthly' | 'annual';
-  forAmbassador?: boolean;
-  isDark?: boolean;
-  usernameToRequest?: string;
+  email: string;
 }
 
-const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
-  priceId,
-  discountId,
-  amount,
-  title = 'Membership',
-  subscriptionPeriod = 'monthly',
-  description = '',
-  forAmbassador = false,
-  discountAmount,
-  isDark = false,
-  usernameToRequest = '',
-}) => {
+const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ email }) => {
   const router = useRouter();
   const [isSaving, setIsSaving] = useState(false);
 
-  const createStripeCheckout = useMemo(
+  const createStripeAnnuallyCheckout = useMemo(
     () =>
       debounce(async (e: React.MouseEventHandler<HTMLButtonElement>) => {
         if (router) {
-          // @ts-ignore
-          const priceId = e?.target?.getAttribute('data-price-id');
-          // @ts-ignore
-
-          const priceType = e?.target?.getAttribute('data-price-type');
-          assertIsDefined(priceId, 'price id');
-          assertIsDefined(priceType, 'price type');
-
           setIsSaving(true);
 
           const { redirectUrl } = await clientHTTP.post('/api/waitlist', {
             body: JSON.stringify({
-              priceId,
-              priceType,
-              discountId: discountId,
-              usernameToRequest: usernameToRequest,
+              priceId: clientEnvs.NEXT_PUBLIC_ANNUAL_PRICE_ID,
+              discountId: clientEnvs.NEXT_PUBLIC_ANNUAL_DISCOUNT_ID,
+              email,
             }),
           });
           console.log('redirect url', redirectUrl);
@@ -112,17 +99,40 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
           router.push(redirectUrl);
         }
       }, {}),
-    [],
+    [email],
+  );
+
+  const createStripeMonthlyCheckout = useMemo(
+    () =>
+      debounce(async (e: React.MouseEventHandler<HTMLButtonElement>) => {
+        if (router) {
+          setIsSaving(true);
+
+          const { redirectUrl } = await clientHTTP.post('/api/waitlist', {
+            body: JSON.stringify({
+              priceId: 'price_1OcdrJKD3CXWHKgZn2rja245',
+              email,
+            }),
+          });
+          console.log('redirect url', redirectUrl);
+          assertIsDefined(redirectUrl, 'url');
+
+          setIsSaving(false);
+          router.push(redirectUrl);
+        }
+      }, {}),
+    [email],
   );
 
   return (
-    <div className={`relative h-20 max-w-sm w-full shadow-md rounded-lg`}>
+    <motion.div
+      variants={fadeAnimation}
+      initial="initial"
+      animate="animate"
+      className={`relative h-20 max-w-sm w-full shadow-md rounded-lg`}
+    >
       <div className="p-4 mb-4 w-full bg-primary-500/20 border-primary-500/30 text-primary-700 border rounded-md text-xs">
         60 Day Money Back Guarantee
-      </div>
-      <div className="flex flex-col items-center space-y-2">
-        <p className={`text-lg ${isDark ? 'text-white' : 'text-gray-900'}`}>{title}</p>
-        <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{description}</p>
       </div>
       {/* <div className="p-4 mb-4 w-[500px] bg-primary-500/20 border-primary-500/30 text-primary-700 border rounded-md text-xs"> */}
       {/* Price Increase To $14.99 starting March 1st
@@ -137,8 +147,8 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
                     <p className="text-md">Monthly Membership</p>
                     <div className="flex items-baseline">
                       <span className="text-sm font-medium">$</span>
-                      <span className="text-xl font-bold">9</span>
-                      <span className="text-md font-medium">.99</span>
+                      <span className="text-xl font-bold">10</span>
+                      <span className="text-md font-medium">.00</span>
                       <span>/month</span>
                     </div>
                   </div>
@@ -146,15 +156,13 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
                 <Divider />
                 <CardFooter>
                   <Button
-                    data-price-id="price_1OcdrJKD3CXWHKgZn2rja245"
-                    data-price-type="monthly"
                     className="w-full"
                     color="secondary"
                     variant="solid"
                     // @ts-expect-error - valid
-                    onClick={(e) => createStripeCheckout.call(e)}
+                    onClick={(e) => createStripeMonthlyCheckout.call(e)}
                   >
-                    <span className="pr-1 text-md">Join</span>
+                    <span className="pr-1 text-md">Join Today</span>
                   </Button>
                 </CardFooter>
               </motion.div>
@@ -204,15 +212,13 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
                 <CardFooter>
                   <Button
                     className="w-full"
-                    data-price-id="price_1OcdrJKD3CXWHKgZn2rja245"
-                    data-price-type="annual"
-                    discount-id=""
                     color="secondary"
                     variant="solid"
+                    isLoading={isSaving}
                     // @ts-expect-error - valid
-                    onClick={(e) => createStripeCheckout.call(e)}
+                    onClick={(e) => createStripeAnnuallyCheckout.call(e)}
                   >
-                    Join
+                    Join Today
                   </Button>
                 </CardFooter>
               </motion.div>
@@ -220,7 +226,7 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
           </Tab>
         </Tabs>
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
 

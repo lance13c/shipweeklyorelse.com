@@ -5,6 +5,7 @@ import SubscriptionCard from '@/components/common/SubscriptionCard';
 import { Input } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import Ztext from 'react-ztext';
 import { z } from 'zod';
 
 const emailSchema = z.string().email();
@@ -28,117 +29,85 @@ const HomePage = () => {
   };
 
   return (
-    <main className="flex w-full dark text-foreground bg-gray-900 py-10 px-[8vw]">
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
-        <h1 color="white" className="mb-2 text-5xl">
-          Scared to ship your products publicly?
+    <main className="flex w-full min-h-[1000px] dark text-foreground bg-gray-900 py-10 px-[8vw]">
+      <motion.div
+        className="h-full w-full"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <h1 color="white" className="mt-4 mb-2 text-4xl lg:text-5xl max-w-[800px]">
+          Scared to ship your software products publicly?
         </h1>
-        <h2 className="mb-4 text-2xl font-medium">so are we.</h2>
-        <div className="flex flex-nowrap justify-between">
-          <p className="text-lg mb-10">A community that ships side projects weekly.</p>
-          <ul className="text flex-col space-y-3 mb-10">
-            <li className="ml-4  list-disc">Weekly project commitments</li>
-            <li className="ml-4  list-disc">$5/month</li>
-            <li className="ml-4  list-disc">All subscriptions split for launchers.</li>
-          </ul>
-          <motion.div
-            className="relative"
-            initial={{
-              opacity: 0.5,
-              scale: '0.75',
-              shadow: '0px 0px 0px 0px rgba(0, 0, 0, 0)',
-            }}
-            animate={{
-              opacity: 1,
-              rotateX: '10deg',
-              rotateY: '20deg',
-              scale: '0.75',
-            }}
-            transition={{
-              delay: 0.2,
-              duration: 1,
+        <h2 className="mb-4 text-xl lg:text-2xl font-medium">so are we.</h2>
+        <div className="flex w-full flex-wrap-reverse justify-between">
+          <div className="flex flex-col">
+            <div className="flex flex-col flex-nowrap justify-between">
+              <p className="text-lg mb-10  mt-4">
+                The{' '}
+                <span className="relative w-fit">
+                  discord community
+                  <div className="absolute right-0 rounded h-[2px] w-full from-secondary-800 to-secondary-400 bg-gradient-to-tr" />
+                </span>{' '}
+                that ships side projects weekly.
+              </p>
+              <ul className="text flex-col space-y-3 mb-10">
+                <li className="ml-4  list-disc">Build the habit of shipping projects weekly.</li>
+                <li className="ml-4  list-disc">Network and be held accountable by impressive people!</li>
+                <li className="ml-4  list-disc">Enjoy the incentives and consequences...😮</li>
+              </ul>
+            </div>
+            <div className="flex flex-col items-start w-[50%] h-full gap-4">
+              <Input
+                color="secondary"
+                variant="bordered"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (emailSchema.safeParse(e.target.value).success) {
+                    setVisible(true);
+                    console.log('true');
+                  } else {
+                    setVisible(false);
+                  }
+                }}
+                type="email"
+                className="font-medium w-full min-w-[400px]"
+                placeholder="Welcome to the grind, email please"
+              />
+
+              {isVisible ? <SubscriptionCard email={email} /> : null}
+            </div>
+          </div>
+
+          <div
+            className="py-8 lg:translate-y-[-50px]"
+            style={{
+              filter: 'drop-shadow(0 0 1rem rgba(246, 194, 91, 0.391))',
             }}
           >
-            <motion.div
-              className="absolute border-purple-700/70 border-4 w-full h-full"
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: 1,
-                translateX: '100px',
-                translateY: '-50px',
-              }}
-              transition={{
-                delay: 0.5,
-                duration: 1,
-              }}
-            />
-            <motion.div
-              className="absolute border-purple-700/50 border-4 w-full h-full"
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: 1,
-                translateX: '100px',
-                translateY: '-50px',
-                scale: 1.1,
-              }}
-              transition={{
-                delay: 1,
-                duration: 1,
-              }}
-            />
-            <motion.div
-              className="absolute border-purple-700/30 border-4 w-full h-full"
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: 1,
-                translateX: '100px',
-                translateY: '-50px',
-                scale: 1.2,
-              }}
-              transition={{
-                delay: 1.5,
-                duration: 1,
-              }}
-            />
-
-            <Logo
-              style={{
-                boxShadow:
-                  '2px -1px 0px 0px rgba(251, 240, 221, 0.8), 4px -1px 0px 0px rgba(251, 240, 221, 0.8), 6px -1px 0px 0px rgba(251, 240, 221, 0.8), 8px -1px 0px 0px rgba(251, 240, 221, 0.8)',
-              }}
-              className="translate-x-16"
-            />
-          </motion.div>
-        </div>
-
-        <div className="flex flex-col items-start w-[50%] h-full gap-4">
-          <Input
-            color="secondary"
-            variant="bordered"
-            onChange={(e) => {
-              setEmail(e.target.value);
-              if (emailSchema.safeParse(e.target.value).success) {
-                setVisible(true);
-                console.log('true');
-              } else {
-                setVisible(false);
-              }
-            }}
-            type="email"
-            className="font-medium"
-            placeholder="Welcome to the grind, email please"
-          />
-
-          <SubscriptionCard priceId={''} amount={0} subscriptionPeriod={'monthly'} />
-          {isVisible ? <SubscriptionCard priceId={''} amount={0} subscriptionPeriod={'monthly'} /> : null}
+            <Ztext
+              depth="1rem"
+              direction="both"
+              event="pointer"
+              eventRotation="40deg"
+              eventDirection="default"
+              fade={false}
+              layers={20}
+              perspective="500px"
+            >
+              <span>
+                <Logo
+                  style={{
+                    boxShadow: '0 0 0.1rem rgba(246, 194, 91)',
+                  }}
+                  className="lg:max-w-[400px] max-h-[400px] max-w-[200px]"
+                />
+              </span>
+            </Ztext>
+          </div>
         </div>
       </motion.div>
+      <section className="h-[300px]" />
     </main>
   );
 };

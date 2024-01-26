@@ -13,8 +13,16 @@ interface Discount {
   coupon: string;
 }
 
-export async function createStripCheckoutSession({ priceId, discountId }: { priceId: string; discountId?: string }) {
-  let successUrl = `${serverEnvs.NEXT_PUBLIC_DOMAIN}/app/payment/verify?session_id={CHECKOUT_SESSION_ID}`;
+export async function createStripCheckoutSession({
+  priceId,
+  discountId,
+  email,
+}: {
+  priceId: string;
+  email: string;
+  discountId?: string;
+}) {
+  let successUrl = `${serverEnvs.NEXT_PUBLIC_DOMAIN}/welcome`;
 
   const discounts: Discount[] = [];
 
@@ -32,6 +40,10 @@ export async function createStripCheckoutSession({ priceId, discountId }: { pric
         quantity: 1,
       },
     ],
+    metadata: {
+      email,
+    },
+    customer_email: email,
     success_url: successUrl,
     cancel_url: `${serverEnvs.NEXT_PUBLIC_DOMAIN}`,
   };
