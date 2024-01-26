@@ -44,6 +44,7 @@ export async function createStripCheckoutSession({
       email,
     },
     customer_email: email,
+    allow_promotion_codes: true,
     success_url: successUrl,
     cancel_url: `${serverEnvs.NEXT_PUBLIC_DOMAIN}`,
   };

@@ -100,7 +100,7 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ email }) => {
           router.push(redirectUrl);
         }
       }, {}),
-    [email],
+    [email, router],
   );
 
   const createStripeMonthlyCheckout = useMemo(
@@ -122,7 +122,7 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ email }) => {
           router.push(redirectUrl);
         }
       }, {}),
-    [email],
+    [email, router],
   );
 
   return (
