@@ -1,6 +1,7 @@
 'use client';
 
 import Logo from '@/components/brand/Logo';
+import SubscriptionCard from '@/components/common/SubscriptionCard';
 import { Input } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
@@ -132,6 +133,7 @@ const HomePage = () => {
             className="font-medium"
             placeholder="Welcome to the grind, email please"
           />
+          <SubscriptionCard priceId={''} amount={0} subscriptionPeriod={'monthly'} />
         </div>
 
         {isVisible ? (
