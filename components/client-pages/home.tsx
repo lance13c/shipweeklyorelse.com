@@ -12,25 +12,12 @@ const emailSchema = z.string().email();
 
 const HomePage = () => {
   const [isVisible, setVisible] = useState(false);
-  const [step, setStep] = useState(0); // 0: email, 1: credit card, 2: welcome message
 
   const [email, setEmail] = useState('');
 
-  const handleSubmitEmail = () => {
-    setStep(1); // Move to credit card input
-  };
-
-  const handleCreditCardSubmit = () => {
-    setStep(2); // Show welcome message
-    setTimeout(() => {
-      // setVisible(false); // Close modal after showing the message
-      setStep(0); // Reset form for the next use
-    }, 3000); // Display welcome message for 3 seconds
-  };
-
   return (
     <>
-      <main className="flex w-full min-h-[1000px] dark text-foreground bg-gray-900 py-10 px-[8vw]">
+      <main className="flex w-full min-h-[100vh] dark text-foreground bg-gray-900 py-10 2xl:py-32 px-[8vw]">
         <motion.div
           className="flex-1 h-full w-full"
           initial={{ opacity: 0 }}
@@ -44,7 +31,7 @@ const HomePage = () => {
             color="white"
             className="mt-4 mb-2 text-4xl lg:text-5xl max-w-[800px]"
           >
-            Scared to ship your side products publicly?
+            Scared to ship your business projects publicly?
           </h1>
           <h2 className="mb-4 text-xl lg:text-2xl font-medium">so are we.</h2>
           <div className="flex w-full flex-wrap-reverse justify-between">
@@ -54,7 +41,7 @@ const HomePage = () => {
                   The{' '}
                   <span className="relative w-fit">
                     discord community
-                    <div className="absolute right-0 rounded h-[2px] w-full from-secondary-800 to-secondary-400 bg-gradient-to-tr" />
+                    <div className="absolute animate-gradient right-0 rounded h-[2px] w-full from-secondary-800 to-secondary-400 bg-gradient-to-tr" />
                   </span>{' '}
                   that ships side projects weekly.
                 </p>
@@ -115,9 +102,6 @@ const HomePage = () => {
           </div>
         </motion.div>
       </main>
-      <footer className="pt-20 md:pt-0 px-[8vw] text-white bg-gray-900 flex-1 flex items-end relative bottom-0 w-full p-2 text-xs">
-        <span className="bottom-0">© 2024 shipweeklyorelse.com brought to you by YoAmigo LLC all rights reserved</span>
-      </footer>
     </>
   );
 };

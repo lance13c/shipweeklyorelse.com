@@ -3,6 +3,7 @@
 import { assertIsDefined } from '@/app/lib/assertions';
 import clientEnvs from '@/app/lib/client/util/clientEnvs';
 import clientHTTP from '@/app/lib/client/util/clientHTTP';
+import { animateLeftVariant, animateRightVariant, fadeAnimation } from '@/util/animations';
 import { Button, Card, CardFooter, CardHeader, Checkbox, Chip, Divider, Link, Tab, Tabs } from '@nextui-org/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
@@ -14,61 +15,6 @@ const SUBSCRIPTION_PERIODS = {
   quarterly: 'Quarterly',
   annual: 'Annual',
   lifetime: 'Lifetime',
-};
-
-const animateLeftVariant = {
-  initial: {
-    opacity: 0,
-    x: -10,
-  },
-  animate: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.3,
-      opacity: {
-        duration: 0.5,
-      },
-    },
-  },
-  exit: {
-    opacity: 0,
-  },
-};
-
-const animateRightVariant = {
-  initial: {
-    opacity: 0,
-    x: 10,
-  },
-  animate: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.3,
-      opacity: {
-        duration: 0.5,
-      },
-    },
-  },
-  exit: {
-    opacity: 0,
-  },
-};
-
-const fadeAnimation = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-    },
-  },
-  exit: {
-    opacity: 0,
-  },
 };
 
 interface SubscriptionCardProps {

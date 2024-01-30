@@ -1,4 +1,5 @@
 import { Providers } from '@/app/providers';
+import Footer from '@/components/common/Footer';
 import Nav from '@/components/layout/Nav';
 import type { Metadata } from 'next';
 import { Sora } from 'next/font/google';
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <Providers>{children}</Providers>
       </body>
+      <Footer />
     </html>
   );
 }
