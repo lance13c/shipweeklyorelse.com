@@ -7,7 +7,7 @@ interface Props {}
 const AboutPage: React.FC<Props> = ({}) => {
   return (
     <main className="w-full min-h-[100vh] bg-gradient-to-tr bg-orange-50 px-[7vw]">
-      <div className="flex flex-col items-start p-4 pt-10 gap-8 w-[60%]">
+      <div className="flex flex-col items-start p-4 pt-10 gap-8 w-full sm:w-[80%] md:w-[60%]">
         <div>
           <h1 className="text-sm uppercase font-medium mb-1">The Story</h1>
           <h2 className="text-3xl">
@@ -40,7 +40,7 @@ const AboutPage: React.FC<Props> = ({}) => {
           <span className="relative text-5xl top-8 text-blue-300">&rdquo;</span>
         </p>
       </div>
-      <div className="mt-10 min-h-[1400px]">
+      <div className="mt-10 min-h-[1400px] pb-12">
         <h2 className="text-sm uppercase font-medium mb-4">Founding Crew</h2>
         <div className="flex flex-col gap-12">
           <div>
@@ -85,7 +85,7 @@ const AboutPage: React.FC<Props> = ({}) => {
           </div>
         </div>
         <div className="flex flex-col w-full text-center justify-center items-center mt-28 text-xl font-medium gap-12">
-          <span className="w-[75%] max-w-2xl">
+          <span className="w-full sm:w-[75%] max-w-2xl">
             Ship business projects weekly. Be held accountable by peers. Share our learnings.
           </span>
           <Link href="/">

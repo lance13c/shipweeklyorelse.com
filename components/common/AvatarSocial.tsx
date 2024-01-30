@@ -24,9 +24,9 @@ const LinkedInAvatar: React.FC<Props> = ({ name, description, socialLinks, image
 
   return (
     <div className="flex flex-col gap-4 max-w-fit">
-      <div className="flex gap-8">
-        <div className="relative w-fit h-fit">
-          <Image src={image} alt={name} width={200} height={200} isZoomed />
+      <div className="flex flex-col sm:flex-row gap-8">
+        <div className="flex-1 relative w-fit h-fit">
+          <Image className="min-w-[60px]" src={image} alt={name} width={200} height={200} isZoomed />
           <motion.div
             style={{
               borderRadius: '1rem',
@@ -52,12 +52,12 @@ const LinkedInAvatar: React.FC<Props> = ({ name, description, socialLinks, image
             <video ref={videoRef} src={video} loop muted />
           </motion.div>
         </div>
-        <div className="flex w-full flex-col max-w-52">
+        <div className="flex w-full flex-col max-w-[80%] sm:max-w-52">
           <p className="text-lg font-medium">{name}</p>
           <p className="text-md">{description}</p>
         </div>
       </div>
-      <div className="flex place-self-end items-end gap-2">
+      <div className="flex place-self-start sm:place-self-end items-end gap-2">
         <Button as="a" isIconOnly href={socialLinks.github} target="_about" title="Github">
           <FaGithubAlt size={18} />
         </Button>
