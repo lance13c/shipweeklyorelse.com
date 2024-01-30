@@ -34,3 +34,46 @@ body {
   background-clip: text;
   text-fill-color: transparent;
 }
+
+.animate-gradient {
+  background: linear-gradient(219deg, hsl(270, 67%, 47%), hsl(270 59% 89%));
+  background-size: 400% 400%;
+
+  -webkit-animation: AnimateGradient 10s ease infinite;
+  -moz-animation: AnimateGradient 10s ease infinite;
+  animation: AnimateGradient 10s ease infinite;
+}
+
+@-webkit-keyframes AnimateGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@-moz-keyframes AnimateGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes AnimateGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

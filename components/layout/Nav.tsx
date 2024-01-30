@@ -24,7 +24,8 @@ const Nav: React.FC<Props> = ({}) => {
       isBordered
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
-      className="w-full bg-gray-800 text-white"
+      maxWidth="full"
+      className="w-full bg-gray-800 text-white px-[8vw] [&_header]:px-0"
     >
       <NavbarContent className="w-full sm:hidden" justify="start">
         <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} />

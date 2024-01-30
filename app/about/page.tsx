@@ -1,11 +1,12 @@
 import Logo from '@/components/brand/Logo';
 import LinkedInAvatar from '@/components/common/AvatarSocial';
+import Link from 'next/link';
 
 interface Props {}
 
 const AboutPage: React.FC<Props> = ({}) => {
   return (
-    <section className="w-full min-h-[100vh] bg-gradient-to-tr bg-orange-50 px-[7vw]">
+    <main className="w-full min-h-[100vh] bg-gradient-to-tr bg-orange-50 px-[7vw]">
       <div className="flex flex-col items-start p-4 pt-10 gap-8 w-[60%]">
         <div>
           <h1 className="text-sm uppercase font-medium mb-1">The Story</h1>
@@ -52,7 +53,7 @@ const AboutPage: React.FC<Props> = ({}) => {
                 twitter: '',
               }}
               image={'/assets/avatars/dom.jpeg'}
-              video={'/assets/avatars/joe.mp4'}
+              video={'/assets/avatars/dom.mp4'}
             />
           </div>
           <div>
@@ -87,15 +88,17 @@ const AboutPage: React.FC<Props> = ({}) => {
           <span className="w-[75%] max-w-2xl">
             Ship business projects weekly. Be held accountable by peers. Share our learnings.
           </span>
-          <Logo
-            style={{
-              width: '140px',
-            }}
-            className={'border-gray-600 border-2'}
-          />
+          <Link href="/">
+            <Logo
+              style={{
+                width: '140px',
+              }}
+              className={'border-gray-600 border-2'}
+            />
+          </Link>
         </div>
       </div>
-    </section>
+    </main>
   );
 };
 
