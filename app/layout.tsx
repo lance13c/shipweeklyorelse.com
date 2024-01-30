@@ -3,6 +3,7 @@ import Footer from '@/components/common/Footer';
 import Nav from '@/components/layout/Nav';
 import type { Metadata } from 'next';
 import { Sora } from 'next/font/google';
+import Image from 'next/image';
 import './globals.css';
 
 const inter = Sora({ subsets: ['latin'] });
@@ -21,10 +22,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </body>
       <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
       <noscript>
-        <img
+        <Image
           src="https://queue.simpleanalyticscdn.com/noscript.gif"
           alt=""
-          referrerpolicy="no-referrer-when-downgrade"
+          referrerPolicy="no-referrer-when-downgrade"
         />
       </noscript>
       <Footer />
