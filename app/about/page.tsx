@@ -1,3 +1,4 @@
+import Logo from '@/components/brand/Logo';
 import LinkedInAvatar from '@/components/common/AvatarSocial';
 
 interface Props {}
@@ -81,6 +82,18 @@ const AboutPage: React.FC<Props> = ({}) => {
               video={'/assets/avatars/jose.mp4'}
             />
           </div>
+        </div>
+        <div className="flex flex-col w-full text-center justify-center items-center mt-28 text-xl font-medium gap-12">
+          <span className="w-[80%]">
+            We ship business projects weekly, are held accountable by peers and share the knowledge we gain along the
+            way.
+          </span>
+          <Logo
+            style={{
+              width: '140px',
+            }}
+            className={'border-gray-600 border-2'}
+          />
         </div>
       </div>
     </section>

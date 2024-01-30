@@ -5,6 +5,7 @@ import {
   Navbar,
   NavbarBrand,
   NavbarContent,
+  NavbarItem,
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
@@ -43,11 +44,11 @@ const Nav: React.FC<Props> = ({}) => {
             Ship Weekly Or Else
           </Link>
         </NavbarBrand>
-        {/* <NavbarItem>
-          <Link color="foreground" href="#">
+        <NavbarItem>
+          <Link color="foreground" href="/about">
             About
           </Link>
-        </NavbarItem> */}
+        </NavbarItem>
       </NavbarContent>
 
       <NavbarMenu>
