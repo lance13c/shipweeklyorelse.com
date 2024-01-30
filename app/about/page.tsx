@@ -6,7 +6,7 @@ interface Props {}
 
 const AboutPage: React.FC<Props> = ({}) => {
   return (
-    <main className="w-full min-h-[100vh] bg-gradient-to-tr bg-orange-50 px-[7vw]">
+    <main className="w-full text-black min-h-[100vh] bg-gradient-to-tr bg-orange-50 px-[7vw]">
       <div className="flex flex-col items-start p-4 pt-10 gap-8 w-full sm:w-[80%] md:w-[60%]">
         <div>
           <h1 className="text-sm uppercase font-medium mb-1">The Story</h1>
