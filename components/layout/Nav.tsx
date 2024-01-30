@@ -55,12 +55,7 @@ const Nav: React.FC<Props> = ({}) => {
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              className="w-full"
-              color={index === 2 ? 'warning' : index === menuItems.length - 1 ? 'danger' : 'foreground'}
-              href="#"
-              size="lg"
-            >
+            <Link className="w-full" color={'foreground'} href={`/${item.toLowerCase()}`} size="lg">
               {item}
             </Link>
           </NavbarMenuItem>
