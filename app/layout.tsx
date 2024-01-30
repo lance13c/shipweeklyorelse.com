@@ -19,6 +19,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <Providers>{children}</Providers>
       </body>
+      <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+      <noscript>
+        <img
+          src="https://queue.simpleanalyticscdn.com/noscript.gif"
+          alt=""
+          referrerpolicy="no-referrer-when-downgrade"
+        />
+      </noscript>
       <Footer />
     </html>
   );
