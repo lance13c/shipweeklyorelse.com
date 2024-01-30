@@ -12,21 +12,8 @@ const emailSchema = z.string().email();
 
 const HomePage = () => {
   const [isVisible, setVisible] = useState(false);
-  const [step, setStep] = useState(0); // 0: email, 1: credit card, 2: welcome message
 
   const [email, setEmail] = useState('');
-
-  const handleSubmitEmail = () => {
-    setStep(1); // Move to credit card input
-  };
-
-  const handleCreditCardSubmit = () => {
-    setStep(2); // Show welcome message
-    setTimeout(() => {
-      // setVisible(false); // Close modal after showing the message
-      setStep(0); // Reset form for the next use
-    }, 3000); // Display welcome message for 3 seconds
-  };
 
   return (
     <>
