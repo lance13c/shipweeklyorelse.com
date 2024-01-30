@@ -43,7 +43,7 @@ const HomePage = () => {
                     discord community
                     <div className="absolute animate-gradient right-0 rounded h-[2px] w-full from-secondary-800 to-secondary-400 bg-gradient-to-tr" />
                   </span>{' '}
-                  that ships side projects weekly.
+                  that ships business projects weekly.
                 </p>
                 <ul className="text flex-col space-y-3 mb-10">
                   <li className="ml-4  list-disc">Build the habit of shipping projects weekly.</li>
@@ -53,6 +53,7 @@ const HomePage = () => {
               </div>
               <div className="flex flex-col items-start w-full h-full gap-4 min-h-[500px]">
                 <Input
+                  label="Email"
                   color="secondary"
                   variant="bordered"
                   onChange={(e) => {
@@ -66,7 +67,7 @@ const HomePage = () => {
                   }}
                   type="email"
                   className="font-medium min-w-[280px] md:min-w-[400px] w-[50%]"
-                  placeholder="Welcome to the grind, email please"
+                  placeholder="Welcome to the grind"
                 />
 
                 {isVisible ? <SubscriptionCard email={email} /> : null}
@@ -99,6 +100,12 @@ const HomePage = () => {
                 </span>
               </Ztext>
             </div>
+          </div>
+          <div>
+            <p className="relative text-lg max-w-lg">
+              This is a community for the striving entrepreneurs in their 20s and 30s who want to build discipline, get
+              over the fear of shipping half-baked projects, and learn to grow fast with other link minded peers.
+            </p>
           </div>
         </motion.div>
       </main>
