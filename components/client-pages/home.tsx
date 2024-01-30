@@ -104,7 +104,7 @@ const HomePage = () => {
           <div>
             <p className="relative text-lg max-w-lg">
               This is a community for the striving entrepreneurs in their 20s and 30s who want to build discipline, get
-              over the fear of shipping half-baked projects, and learn to grow fast with other link minded peers.
+              over the fear of shipping half-baked projects, and learn to grow fast with other like minded peers.
             </p>
           </div>
         </motion.div>
