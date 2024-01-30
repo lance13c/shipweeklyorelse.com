@@ -44,7 +44,7 @@ const AboutPage: React.FC<Props> = ({}) => {
         <div className="flex flex-col gap-12">
           <div>
             <LinkedInAvatar
-              description="A dev who dances, addicted to cereal, 7 year professional web dev who has been scared of posting things in public for too long, hanse shipweeklyorelse.com 🙂"
+              description="A dev who dances, addicted to cereal, 7 year professional web dev who has been scared of posting things in public for too long, hence shipweeklyorelse.com 🙂"
               name="Dom"
               socialLinks={{
                 github: 'https://github.com/lance13c',
@@ -84,9 +84,8 @@ const AboutPage: React.FC<Props> = ({}) => {
           </div>
         </div>
         <div className="flex flex-col w-full text-center justify-center items-center mt-28 text-xl font-medium gap-12">
-          <span className="w-[80%]">
-            We ship business projects weekly, are held accountable by peers and share the knowledge we gain along the
-            way.
+          <span className="w-[75%] max-w-2xl">
+            Ship business projects weekly. Be held accountable by peers. Share our learnings.
           </span>
           <Logo
             style={{
