@@ -18,10 +18,11 @@ const SUBSCRIPTION_PERIODS = {
 };
 
 interface SubscriptionCardProps {
+  showDarkText: boolean;
   email: string;
 }
 
-const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ email }) => {
+const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ email, showDarkText }) => {
   const router = useRouter();
   const [isSaving, setIsSaving] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -76,9 +77,13 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ email }) => {
       variants={fadeAnimation}
       initial="initial"
       animate="animate"
-      className={`relative h-20 max-w-sm w-full shadow-md rounded-lg`}
+      className={`relative h-fit max-w-sm w-full rounded-lg`}
     >
-      <div className="p-4 mb-4 w-full bg-primary-500/20 border-primary-500/30 text-primary-700 border rounded-md text-xs">
+      <div
+        className={`p-4 mb-4 w-full bg-primary-500/20 border-primary-500/30 ${
+          showDarkText ? 'text-primary-300' : 'text-primary-700'
+        } border rounded-md text-xs`}
+      >
         60 Day Money Back Guarantee
       </div>
 
@@ -99,29 +104,29 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ email }) => {
                 <CardHeader className="flex gap-3 justify-between">
                   <div className="flex flex-col">
                     <p className="text-md">Monthly Membership</p>
-                    <div className="flex items-baseline">
+                    <span className="flex items-baseline">
                       <span className="text-sm font-medium">$</span>
                       <span className="text-xl font-bold">10</span>
                       <span className="text-md font-medium">.00</span>
                       <span>/month</span>
-                    </div>
+                    </span>
                   </div>
                 </CardHeader>
                 <Divider />
                 <CardFooter className="flex flex-col gap-3 items-start">
                   <Checkbox
-                    className="text-xs"
+                    className="text-xs text-left"
                     onChange={(e) => {
                       setIsChecked(e.target.checked);
                     }}
                   >
                     <span className="text-xs">
                       You have read and agree to our{' '}
-                      <Link className="text-xs" href="/terms">
+                      <Link className="text-xs text-primary-500" underline="always" href="/terms">
                         terms of service
                       </Link>{' '}
                       and{' '}
-                      <Link className="text-xs" href="/privacy">
+                      <Link className="text-xs text-primary-500" underline="always" href="/privacy">
                         privacy policy
                       </Link>
                       .
@@ -132,10 +137,15 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ email }) => {
                     className={`${!isChecked ? 'cursor-not-allowed' : ''} w-full`}
                     color={isChecked ? 'secondary' : 'default'}
                     variant="solid"
-                    // @ts-expect-error - valid
-                    onClick={(e) => createStripeMonthlyCheckout.call(e)}
+                    onClick={(e) => {
+                      // @ts-expect-error - valid
+                      createStripeMonthlyCheckout.call(e);
+                      // @ts-expect-error - valid
+                      sa_event?.('click_monthly_checkout');
+                    }}
+                    title="Join and Start Shipping Today"
                   >
-                    <span className="pr-1 text-md">Join Today</span>
+                    <span className="pr-1 text-md">Join and Start Shipping Today</span>
                   </Button>
                 </CardFooter>
               </motion.div>
@@ -184,19 +194,18 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ email }) => {
 
                 <CardFooter className="flex flex-col gap-3 items-start">
                   <Checkbox
-                    className="text-xs"
+                    className="text-xs text-left"
                     onChange={(e) => {
-                      console.log(e.target.checked);
                       setIsChecked(e.target.checked);
                     }}
                   >
                     <span className="text-xs">
                       You have read and agree to our{' '}
-                      <Link className="text-xs" href="/terms">
+                      <Link className="text-xs text-primary-500" underline="always" href="/terms">
                         terms of service
                       </Link>{' '}
                       and{' '}
-                      <Link className="text-xs" href="/privacy">
+                      <Link className="text-xs text-primary-500" underline="always" href="/privacy">
                         privacy policy
                       </Link>
                       .
@@ -208,10 +217,15 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ email }) => {
                     color={isChecked ? 'secondary' : 'default'}
                     variant="solid"
                     isLoading={isSaving}
-                    // @ts-expect-error - valid
-                    onClick={(e) => createStripeAnnuallyCheckout.call(e)}
+                    onClick={(e) => {
+                      // @ts-expect-error - valid
+                      createStripeAnnuallyCheckout.call(e);
+                      // @ts-expect-error - valid
+                      sa_event?.('click_annual_checkout');
+                    }}
+                    title="Join and Start Shipping Today"
                   >
-                    Join Today
+                    Join and Start Shipping Today
                   </Button>
                 </CardFooter>
               </motion.div>

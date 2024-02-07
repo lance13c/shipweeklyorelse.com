@@ -1,5 +1,6 @@
 import Logo from '@/components/brand/Logo';
 import LinkedInAvatar from '@/components/common/AvatarSocial';
+import CallToAction from '@/components/common/CallToAction';
 import Link from 'next/link';
 
 interface Props {}
@@ -96,6 +97,9 @@ const AboutPage: React.FC<Props> = ({}) => {
               className={'border-gray-600 border-2'}
             />
           </Link>
+          <div className="flex justify-center items-center">
+            <CallToAction showDarkText />
+          </div>
         </div>
       </div>
     </main>
